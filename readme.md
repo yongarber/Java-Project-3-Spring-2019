@@ -86,8 +86,8 @@ When your application is run, a window should pop up with options that limit the
 
 ## Step 5 - Create a pane to review users.
 Create a pane that lists all the users. Each user receives their own pane, according to the layout in the image below. You may use any combination of component panes described in the book to accomplish this.
-- **Do not** try to make the spacing pixel perfect. You also do not have to download and use the Twitter typeface Helvetica Neue.
-- **Do** try to recreate the relative position of data items as closely as possible. As for fonts, just pick a default font that is close to the look and feel of the fonts in these layouts.
+- **DO NOT** try to make the spacing pixel perfect. You also do not have to download and use the Twitter typeface Helvetica Neue.
+- **DO** try to recreate the relative position of data items as closely as possible. As for fonts, just pick a default font that is close to the look and feel of the fonts in these layouts.
 
 ![User Layout](user_layout.png)
 
@@ -103,15 +103,12 @@ Create a pane that lists all the tweets for *a single* user according to the lay
 Create a pane that lists all the tweets in the data set that either quote or reply to *a single* tweet. These tweets should follow the same styling as the image above. At the top of this pane, provide a radio button to show only: a) quotes; b) replies; c) quotes and replies.
 
 ## Step 8 - Create an interactive layout for all three panes.
-This is a layout in three columns:
-- In the left column, place your pane to review users. When the layout is loaded, this should be populated with all the users found in the dataset (or as restricted by the loading screen).
-- In the middle column, place your pane to review tweets. This pane should be initially empty. When a user is clicked in the left column, the middle column should show all the tweets for that user that have been loaded. If a different user is clicked in the left column, the middle collumn should switch to showing the tweets for that user.
-- In the right column, place your pane to review quotes and replies. This pane should be initially empty. When a tweet is clicked in the middle column, the right column should show all the quotes and replies for that tweet that have been loaded. If a different tweet is clicked in the middle column, the right column should switch to showing the quotes and replies for that tweet. If a different user is clicked in the left column, the right column should be emptied until the user clicks on a tweet for that user.
+This is a layout that contains all three of the panes that you have created for the previous steps, but they should interact with each other:
+- In one location in your layout, place your pane to review users. When the layout is loaded, this should be populated with all the users found in the dataset (or as restricted by the loading screen).
+- In another location, place your pane to review tweets. This pane should be initially empty. When a user is clicked in the user pane, this second pane should show all the tweets for that user that have been loaded. If a different user is clicked in the user pane, this pane should switch to showing the tweets for that user.
+- In a third location, place your pane to review quotes and replies. This pane should be initially empty. When a tweet is clicked in the tweet pane, the tweets and replies pane should show all the quotes and replies for that tweet. If a different tweet is clicked in the tweet pane, the quotes and replies pane should switch to showing the quotes and replies for that tweet. If a different user is clicked in the user pane, the quotes and replies pane should be emptied until the user clicks on a tweet for that user.
 
-## Step 9 - Sort users and tweets.
-In the user pane that you created above, sort the users by the number of tweets. For the pane of tweets that you created above, sort the tweets by the number of replies. You have the option of using `Comparable` or `Comparator` - either one is fine.
-
-## Step 10 - Push to Github
+## Step 9 - Push to Github
 Do not forget to push your final submission to Github before the deadline.
 
 # Grading
