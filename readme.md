@@ -1,4 +1,4 @@
-# Project 3
+# Project 3: Tweet Moderation GUI
 In this project, you will use data files of social media posts and accounts to design a user interface that reveals characteristics about suspicious activity from twitter users. This project bears many similarities to the previous project, but considers the issue from the other perspective - that of a content moderator or social media researcher.
 
 You will be using <a href="https://about.twitter.com/en_us/values/elections-integrity.html#data">two data sets from Twitter</a>. These datasets represent an ongoing investigation into suspicious account activity that *may* be in support of a state-sponsored information manipulation campaign, that is, an attempt to sway conversation on social media to support a perspective. You need to download them from the links below for this project, but you will notice that the .gitignore file contains a listing for csv files. **DO NOT** alter this - these are huge files, and should not be stored in your online repository. There are two investigations described at the site - we will be using the Iranian event, in which 770 accounts engaged in coordinated behavior to manipulate public opinion.
@@ -92,7 +92,7 @@ Create a pane that lists all the users. Each user receives their own pane, accor
 ![User Layout](user_layout.png)
 
 ## Step 5 1/2 - Commit and Push to Github
-Remember, this is not like submitting a project to Blackboard all at the end. Commit / Push early and often to establish a rhythm with your partner(s). Do not wait until the last minute! While you are working on each step below, you should be backing up your work incrementally - save early, save often.
+Remember, this is not like submitting a project to Blackboard all at the end. Commit / Push early and often. Do not wait until the last minute! While you are working on each step below, you should be backing up your work incrementally - save early, save often.
 
 ## Step 6 - Create a pane to review tweets.
 Create a pane that lists all the tweets for *a single* user according to the layout in the image below. At the top of this pane, provide a radio button to show only: a) tweets; b) replies; c) tweets and replies.
