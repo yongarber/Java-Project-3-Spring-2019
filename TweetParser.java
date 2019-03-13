@@ -21,7 +21,11 @@ public class TweetParser{
       fields[0] = fields[0].substring(1);
       try{
         long l = Long.parseLong(fields[0]);
-        tweets.add(new Tweet(l, fields[1]));
+        long Qcount = Long.parseLong(fields[23]);
+        long Rcount = Long.parseLong(fields[24]);
+        long Lcount = Long.parseLong(fields[25]);
+        long Recount = Long.parseLong(fields[26]);
+        tweets.add(new Tweet(l, fields[1], fields[12],fields[13], Qcount, Rcount, Lcount, Recount));
         i++;
       }
       catch(Exception e){
