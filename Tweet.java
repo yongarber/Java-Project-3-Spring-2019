@@ -1,14 +1,16 @@
+import java.math.BigInteger;
+
 public class Tweet{
     private long tweetid; // index[0]
     private String userid; // index[1]
     private String tweet_text; // index[12]
     private String tweet_time;// index[13]
-    private long quote_count;// index[23]
-    private long reply_count;// index[24]
-    private long like_count; // index[25]
-    private long retweet_count; // index[26]
+    private String quote_count;// index[23]
+    private String reply_count;// index[24]
+    private String like_count; // index[25]
+    private String retweet_count; // index[26]
 
-    public Tweet(long tweetid, String userid,String tweet_text,String tweet_time,long quote_count,long reply_count,long like_count,long retweet_count){
+    public Tweet(long tweetid, String userid,String tweet_text,String tweet_time,String quote_count,String reply_count,String like_count,String retweet_count){
       this.tweetid = tweetid;
       this.userid = userid;
       this.tweet_text = tweet_text;
@@ -38,16 +40,16 @@ public class Tweet{
     public String gettweet_time(){
         return tweet_time;
     }
-    public long getquote_count(){
+    public String getquote_count(){
         return quote_count;
     }
-    public long getreply_count(){
+    public String getreply_count(){
         return reply_count;
     }
-    public long getlike_count(){
+    public String getlike_count(){
         return like_count;
     }
-    public long getretweet_count(){
+    public String getretweet_count(){
         return retweet_count;
     }
   }

@@ -1,19 +1,59 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+
 import javafx.collections.FXCollections;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class TweetModerationGUI extends Application {
     ArrayList<Tweet> tweets;
     ArrayList<User> users;
 
     protected BorderPane getBorderPane(ArrayList<User> users) {
+
+
+        Slider slider = new Slider();
+        slider.setMin(0);
+        slider.setMax(users.size());
+        slider.setValue(40);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(50);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(10);
+
+        Slider slider2 = new Slider();
+        slider.setMin(0);
+        slider.setMax(tweets.size()); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
+        slider.setValue(40);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(50);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(10);
+
+        RadioButton Eng =new RadioButton("English");
+        RadioButton other =new RadioButton("Other");
+        RadioButton All =new RadioButton("All");
+        HBox buttons = new HBox(Eng,other, All);
+
+        Button Cancel = new Button("Cancel");
+        Button Parse = new Button("Parse");
+        HBox buttons1 = new HBox(Parse, Cancel);
+
+        ToggleGroup group = new ToggleGroup();
+        Eng.setToggleGroup(group);
+        other.setToggleGroup(group);
+        All.setToggleGroup(group);
+
+        VBox sliders = new VBox(20,slider, slider2,buttons, buttons1);
+
         BorderPane pane = new BorderPane();
         Text text = new Text("Loaded " + users.size() + " users; 12 tweets");
         ArrayList<Pane> content = new ArrayList<Pane>();
@@ -22,6 +62,7 @@ public class TweetModerationGUI extends Application {
         content.add(new Pane());
         ListView<Pane> lv = new ListView<>(
             FXCollections.observableArrayList(content));
+        pane.setTop(sliders);
         pane.setBottom(text);
         pane.setCenter(new ScrollPane(lv));
         return pane;
@@ -53,5 +94,7 @@ public class TweetModerationGUI extends Application {
         primaryStage.setTitle("TweetModerator Demo");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
     }
 }
