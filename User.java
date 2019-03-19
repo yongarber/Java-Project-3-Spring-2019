@@ -7,11 +7,11 @@ public class User {
   private String user_reported_location; //index[3]
   private String user_profile_description; //index[4]
   private String user_profile_url; //index[5]
-  private int follower_count; //index[6]
-  private int following_count; //index[7]
+  private String follower_count; //index[6]
+  private String following_count; //index[7]
 
 
-  public User (String userid,String user_display_name,String user_reported_location,String user_profile_description,String user_profile_url,int follower_count,int following_count){
+  public User (String userid,String user_display_name,String user_reported_location,String user_profile_description,String user_profile_url,String follower_count,String following_count){
     this.userid = userid;
     tweets = new ArrayList<Tweet>();
     this.user_display_name = user_display_name;
@@ -42,11 +42,11 @@ public class User {
     return user_profile_url;
   }
 
-  public int getfollower_count(){
+  public String getfollower_count(){
     return follower_count;
   }
 
-  public int getfollowing_count(){
+  public String getfollowing_count(){
     return following_count;
   }
 

@@ -15,9 +15,9 @@ public class UserParser{
       String[] fields = line.split("\",\"");
       fields[0] = fields[0].substring(1);
       try{
-        int followerCount = Integer.parseInt(fields[6]);
-        int followingCount = Integer.parseInt(fields[7]);
-        users.add(new User(fields[0], fields[1],fields[3],fields[4],fields[5], followerCount, followingCount));
+//        int followerCount = Integer.parseInt(fields[6]);
+//        int followingCount = Integer.parseInt(fields[7]);
+        users.add(new User(fields[0], fields[1],fields[3],fields[4],fields[5], fields[6], fields[7]));
         i++;
       }
       catch(Exception e){

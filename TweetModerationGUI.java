@@ -18,10 +18,10 @@ public class TweetModerationGUI extends Application {
     protected BorderPane getBorderPane(ArrayList<User> users) {
 
 
-        Slider slider = new Slider();
-        slider.setMin(0);
-        slider.setMax(users.size());
-        slider.setValue(40);
+        Slider slider = new Slider(1,800,40);
+//        slider.setMin(0);
+//        slider.setMax(800);
+//        slider.setValue(40);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
         slider.setMajorTickUnit(50);
@@ -29,14 +29,14 @@ public class TweetModerationGUI extends Application {
         slider.setBlockIncrement(10);
 
         Slider slider2 = new Slider();
-        slider.setMin(0);
-        slider.setMax(tweets.size()); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
-        slider.setValue(40);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-        slider.setMajorTickUnit(50);
-        slider.setMinorTickCount(5);
-        slider.setBlockIncrement(10);
+        slider2.setMin(1);
+        slider2.setMax(1200000); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
+        slider2.setValue(40);
+        slider2.setShowTickLabels(true);
+        slider2.setShowTickMarks(true);
+        slider2.setMajorTickUnit(10000);
+        slider2.setMinorTickCount(5);
+        slider2.setBlockIncrement(10);
 
         RadioButton Eng =new RadioButton("English");
         RadioButton other =new RadioButton("Other");
