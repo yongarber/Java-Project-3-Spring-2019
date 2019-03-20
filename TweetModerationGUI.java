@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 public class TweetModerationGUI extends Application {
     ArrayList<Tweet> tweets;
     ArrayList<User> users;
+    String parse = "All";  //parse can be "All" or "Eng" or "Other"
 
     protected BorderPane getBorderPane(ArrayList<User> users) {
 
@@ -39,18 +42,55 @@ public class TweetModerationGUI extends Application {
         slider2.setBlockIncrement(10);
 
         RadioButton Eng =new RadioButton("English");
-        RadioButton other =new RadioButton("Other");
+        RadioButton Other =new RadioButton("Other");
         RadioButton All =new RadioButton("All");
-        HBox buttons = new HBox(Eng,other, All);
+        HBox buttons = new HBox(Eng,Other, All);
 
         Button Cancel = new Button("Cancel");
+//        Cancel.setOnAction(new EventHandler<ActionEvent>() {
+//                @Override public void handle(ActionEvent e) {
+//                        label.setText("Cancel"); }
+//                                    });
+
         Button Parse = new Button("Parse");
+//        Parse.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override public void handle(ActionEvent e) {
+//                label.setText("Parse"); }
+//        });
         HBox buttons1 = new HBox(Parse, Cancel);
 
         ToggleGroup group = new ToggleGroup();
         Eng.setToggleGroup(group);
-        other.setToggleGroup(group);
+        Other.setToggleGroup(group);
         All.setToggleGroup(group);
+        All.setSelected(true);
+
+
+        Eng.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Eng");
+                parse="Eng";
+            }
+        });
+
+        Other.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Other");
+                parse="Other";
+            }
+        });
+
+        All.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("All");
+                parse="All";
+            }
+        });
+
+
 
         VBox sliders = new VBox(20,slider, slider2,buttons, buttons1);
 
