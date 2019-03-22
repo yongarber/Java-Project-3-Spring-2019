@@ -16,7 +16,7 @@ public class TweetParser{
     String line = scanner.nextLine();//the first line is field headers, we do not want that.
     System.out.println(line);
     int i = 0;
-    while(scanner.hasNextLine() && i < 100){ //this i < 10000 is just to help you test, so that it doesn't take too long to run each time. you should eventually move towards reading in the entire file.
+    while(scanner.hasNextLine() && i < TweetModerationGUI.NumberTweets){ //this i < 10000 is just to help you test, so that it doesn't take too long to run each time. you should eventually move towards reading in the entire file.
       line = scanner.nextLine();
       String[] fields = line.split("\",\"");
       fields[0] = fields[0].substring(1);

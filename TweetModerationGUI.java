@@ -1,4 +1,7 @@
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
@@ -16,6 +18,8 @@ import javafx.scene.layout.VBox;
 public class TweetModerationGUI extends Application {
     ArrayList<Tweet> tweets;
     ArrayList<User> users;
+    static long NumberUsers = 0;
+    static long NumberTweets = 0;
     String parse = "All";  //parse can be "All" or "Eng" or "Other"
 
     protected BorderPane getBorderPane(ArrayList<User> users) {
@@ -31,6 +35,13 @@ public class TweetModerationGUI extends Application {
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(10);
 
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                NumberUsers= Math.round(newValue.doubleValue());
+                System.out.println(NumberUsers);
+            }
+        });
         Slider slider2 = new Slider();
         slider2.setMin(1);
         slider2.setMax(1200000); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
@@ -41,22 +52,36 @@ public class TweetModerationGUI extends Application {
         slider2.setMinorTickCount(5);
         slider2.setBlockIncrement(10);
 
+        slider2.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                NumberTweets= Math.round(newValue.doubleValue());
+                System.out.println(NumberTweets);
+            }
+        });
+
         RadioButton Eng =new RadioButton("English");
         RadioButton Other =new RadioButton("Other");
         RadioButton All =new RadioButton("All");
         HBox buttons = new HBox(Eng,Other, All);
 
         Button Cancel = new Button("Cancel");
-//        Cancel.setOnAction(new EventHandler<ActionEvent>() {
-//                @Override public void handle(ActionEvent e) {
-//                        label.setText("Cancel"); }
-//                                    });
+        Cancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Cancel");
+                Platform.exit();
+            }
+        });
 
         Button Parse = new Button("Parse");
-//        Parse.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override public void handle(ActionEvent e) {
-//                label.setText("Parse"); }
-//        });
+        Parse.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Parse");
+                parseUsersAndTweets();
+            }
+        });
         HBox buttons1 = new HBox(Parse, Cancel);
 
         ToggleGroup group = new ToggleGroup();
