@@ -21,6 +21,9 @@ public class TweetModerationGUI extends Application {
     static long NumberUsers = 0;
     static long NumberTweets = 0;
     String parse = "All";  //parse can be "All" or "Eng" or "Other"
+    Stage stageTweets = new Stage();
+    Stage stage = new Stage();
+
 
     protected BorderPane getBorderPane(ArrayList<User> users) {
 
@@ -59,6 +62,9 @@ public class TweetModerationGUI extends Application {
                 System.out.println(NumberTweets);
             }
         });
+         Label nameslider = new Label("Users Slider");
+         Label nameslider2 = new Label("Tweets Slider");
+
 
         RadioButton Eng =new RadioButton("English");
         RadioButton Other =new RadioButton("Other");
@@ -73,7 +79,6 @@ public class TweetModerationGUI extends Application {
                 Platform.exit();
             }
         });
-
         Button Parse = new Button("Parse");
         Parse.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -82,7 +87,15 @@ public class TweetModerationGUI extends Application {
                 parseUsersAndTweets();
             }
         });
-        HBox buttons1 = new HBox(Parse, Cancel);
+        Button ShowUser = new Button("Show Users");
+        ShowUser.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Show Users");
+                stage.show();
+            }
+        });
+        HBox buttons1 = new HBox(Parse, Cancel,ShowUser);
 
         ToggleGroup group = new ToggleGroup();
         Eng.setToggleGroup(group);
@@ -115,12 +128,38 @@ public class TweetModerationGUI extends Application {
             }
         });
 
+        // the pane for the users
+        Pane canvasTweets = new Pane();
+        canvasTweets.setPrefSize(200,200);
 
 
-        VBox sliders = new VBox(20,slider, slider2,buttons, buttons1);
+        //new stage for users
+        stageTweets.setTitle("Tweets");
+        stageTweets.setScene(new Scene(canvasTweets, 350, 450));
+        stageTweets.show();
+
+
+
+        // the pane for the users
+        Pane canvas = new Pane();
+        canvas.setPrefSize(200,200);
+        Label userspane = new Label (NumberUsers +"  users");
+        canvas.getChildren().addAll(userspane);
+        for(int i=0; i< NumberUsers; i++){
+            Label userspane1 = new Label (i +"  users");
+            canvas.getChildren().addAll(userspane1);
+        }
+        //new stage for users
+        stage.setTitle("Users");
+        stage.setScene(new Scene(canvas, 350, 450));
+
+
+
+
+        VBox sliders = new VBox(20,nameslider,slider,nameslider2, slider2,buttons, buttons1);
 
         BorderPane pane = new BorderPane();
-        Text text = new Text("Loaded " + users.size() + " users; 12 tweets");
+        Text text = new Text("Loaded " + users.size() + " users " +tweets.size()+" tweets");
         ArrayList<Pane> content = new ArrayList<Pane>();
         content.add(new Pane());
         content.add(new Pane());
@@ -155,7 +194,7 @@ public class TweetModerationGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         parseUsersAndTweets();
-        Scene scene = new Scene(getBorderPane(users), 200, 200);
+        Scene scene = new Scene(getBorderPane(users), 500, 350);
         primaryStage.setTitle("TweetModerator Demo");
         primaryStage.setScene(scene);
         primaryStage.show();
