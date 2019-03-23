@@ -16,14 +16,32 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class TweetModerationGUI extends Application {
-    ArrayList<Tweet> tweets;
-    ArrayList<User> users;
+    static ArrayList<Tweet> tweets;
+    static ArrayList<User> users;
     static long NumberUsers = 0;
     static long NumberTweets = 0;
     String parse = "All";  //parse can be "All" or "Eng" or "Other"
     Stage stageTweets = new Stage();
     Stage stage = new Stage();
 
+    public void parseUsersAndTweets(){
+        try{
+            tweets = TweetParser.parseTweets("iranian_tweets_csv_hashed.csv");
+            users = UserParser.parseUsers("iranian_users_csv_hashed.csv");
+            System.out.println(tweets.size() + " tweets parsed");
+            System.out.println(users.size() + " users parsed");
+            for(Tweet tweet: tweets){
+                for(User user: users)
+                    if(tweet.getuserid().equals(user.getuserid())){
+                        user.addTweet(tweet);
+                        break;
+                    }
+            }
+        }catch(Exception e){
+            System.out.println("file error: "+ e.getClass().getCanonicalName());
+            System.out.println(e.getMessage());
+        }
+    }
 
     protected BorderPane getBorderPane(ArrayList<User> users) {
 
@@ -48,7 +66,7 @@ public class TweetModerationGUI extends Application {
         Slider slider2 = new Slider();
         slider2.setMin(1);
         slider2.setMax(1200000); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
-        slider2.setValue(40);
+        slider2.setValue(1);
         slider2.setShowTickLabels(true);
         slider2.setShowTickMarks(true);
         slider2.setMajorTickUnit(10000);
@@ -85,6 +103,7 @@ public class TweetModerationGUI extends Application {
             public void handle(ActionEvent event) {
                 System.out.println("Parse");
                 parseUsersAndTweets();
+                getBorderPane(users);
             }
         });
         Button ShowUser = new Button("Show Users");
@@ -138,17 +157,22 @@ public class TweetModerationGUI extends Application {
         stageTweets.setScene(new Scene(canvasTweets, 350, 450));
         stageTweets.show();
 
+        //pane for each user
+        Pane EachUser = new Pane();
+        Label userId = new Label(User.getuserid());
 
 
         // the pane for the users
-        Pane canvas = new Pane();
+        ScrollPane canvas = new ScrollPane();
         canvas.setPrefSize(200,200);
         Label userspane = new Label (NumberUsers +"  users");
-        canvas.getChildren().addAll(userspane);
-        for(int i=0; i< NumberUsers; i++){
+        VBox UsersPane  = new VBox();
+        UsersPane.getChildren().add(userspane);
+        for(int i=0; i<= NumberUsers; i++){
             Label userspane1 = new Label (i +"  users");
-            canvas.getChildren().addAll(userspane1);
+            UsersPane.getChildren().add(userspane1);
         }
+        canvas.setContent(UsersPane);
         //new stage for users
         stage.setTitle("Users");
         stage.setScene(new Scene(canvas, 350, 450));
@@ -159,7 +183,7 @@ public class TweetModerationGUI extends Application {
         VBox sliders = new VBox(20,nameslider,slider,nameslider2, slider2,buttons, buttons1);
 
         BorderPane pane = new BorderPane();
-        Text text = new Text("Loaded " + users.size() + " users " +tweets.size()+" tweets");
+        Text text = new Text("Loaded " + users.size() + " users; " +tweets.size()+" tweets");
         ArrayList<Pane> content = new ArrayList<Pane>();
         content.add(new Pane());
         content.add(new Pane());
@@ -170,25 +194,10 @@ public class TweetModerationGUI extends Application {
         pane.setBottom(text);
         pane.setCenter(new ScrollPane(lv));
         return pane;
+
     }
 
-    public void parseUsersAndTweets(){
-        try{
-            tweets = TweetParser.parseTweets("iranian_tweets_csv_hashed.csv");
-            users = UserParser.parseUsers("iranian_users_csv_hashed.csv");
-            System.out.println(tweets.size() + " tweets parsed");
-            System.out.println(users.size() + " users parsed");
-            for(Tweet tweet: tweets){
-                for(User user: users)
-                    if(tweet.getuserid().equals(user.getuserid())){
-                        user.addTweet(tweet);
-                        break;
-                    }
-            }
-        }catch(Exception e){
-            System.out.println("file error: "+ e.getClass().getCanonicalName());
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
