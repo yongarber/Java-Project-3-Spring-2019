@@ -159,7 +159,7 @@ public class TweetModerationGUI extends Application {
 
         //pane for each user
         Pane EachUser = new Pane();
-        Label userId = new Label(User.getuserid());
+        //Label userId = new Label(User.getuserid());
 
 
         // the pane for the users
@@ -198,7 +198,6 @@ public class TweetModerationGUI extends Application {
     }
 
 
-    }
 
     @Override
     public void start(Stage primaryStage) {
