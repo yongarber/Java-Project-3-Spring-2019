@@ -155,7 +155,7 @@ public class TweetModerationGUI extends Application {
         //new stage for users
         stageTweets.setTitle("Tweets");
         stageTweets.setScene(new Scene(canvasTweets, 350, 450));
-        stageTweets.show();
+
 
         //pane for each user
         Pane EachUser = new Pane();
@@ -170,7 +170,15 @@ public class TweetModerationGUI extends Application {
         UsersPane.getChildren().add(userspane);
         for(int i=0; i<= NumberUsers; i++){
             Label userspane1 = new Label (i +"  users");
-            UsersPane.getChildren().add(userspane1);
+            Button Tweets = new Button("Show Tweets");
+            UsersPane.getChildren().addAll(userspane1, Tweets);
+            Tweets.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("Show Tweets");
+                    stageTweets.show();
+                }
+            });
         }
         canvas.setContent(UsersPane);
         //new stage for users
