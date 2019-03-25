@@ -16,8 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class TweetModerationGUI extends Application {
-    static ArrayList<Tweet> tweets;
-    static ArrayList<User> users;
+    ArrayList<Tweet> tweets;
+    ArrayList<User> users;
+    //ArrayList<User> Users;
     static long NumberUsers = 0;
     static long NumberTweets = 0;
     String parse = "All";  //parse can be "All" or "Eng" or "Other"
@@ -28,6 +29,7 @@ public class TweetModerationGUI extends Application {
         try{
             tweets = TweetParser.parseTweets("iranian_tweets_csv_hashed.csv");
             users = UserParser.parseUsers("iranian_users_csv_hashed.csv");
+            //Users = UserParser.parseUsers("iranian_users_csv_hashed.csv");
             System.out.println(tweets.size() + " tweets parsed");
             System.out.println(users.size() + " users parsed");
             for(Tweet tweet: tweets){
@@ -50,6 +52,7 @@ public class TweetModerationGUI extends Application {
 //        slider.setMin(0);
 //        slider.setMax(800);
 //        slider.setValue(40);
+        slider.setValue(1);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
         slider.setMajorTickUnit(50);
@@ -170,12 +173,15 @@ public class TweetModerationGUI extends Application {
         UsersPane.getChildren().add(userspane);
         for(int i=0; i<= NumberUsers; i++){
             Label userspane1 = new Label (i +"  users");
-            Button Tweets = new Button("Show Tweets");
+            Button Tweets = new Button(i + "  Show Tweets");
+            //Label location = new Label ("Location: "+ Users.get(i).user_reported_location());
+            Tweets.setId(i+"");
             UsersPane.getChildren().addAll(userspane1, Tweets);
             Tweets.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     System.out.println("Show Tweets");
+                    System.out.println(Tweets.getId());
                     stageTweets.show();
                 }
             });

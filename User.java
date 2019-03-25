@@ -30,6 +30,10 @@ public class User {
     return tweets;
   }
 
+  public String user_reported_location(){
+    return user_reported_location;
+  }
+
   public String getuser_display_name(){
     return user_display_name;
   }
@@ -53,4 +57,5 @@ public class User {
   public String getuserid(){
     return userid;
   }
+  public String toString(){return "not implemented";}
 }
