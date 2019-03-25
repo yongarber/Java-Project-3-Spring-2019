@@ -174,7 +174,7 @@ public class TweetModerationGUI extends Application {
         for(int i=0; i<= NumberUsers; i++){
             Label userspane1 = new Label (i +"  users");
             Button Tweets = new Button(i + "  Show Tweets");
-            //Label location = new Label ("Location: "+ Users.get(i).user_reported_location());
+            //Label location = new Label ("Location: "+ users.get(i).user_reported_location());
             Tweets.setId(i+"");
             UsersPane.getChildren().addAll(userspane1, Tweets);
             Tweets.setOnAction(new EventHandler<ActionEvent>() {
