@@ -15,12 +15,12 @@ public class TweetParser{
     Scanner scanner = new Scanner(new File(filename), "UTF-8");
     String line = scanner.nextLine();//the first line is field headers, we do not want that.
     System.out.println(line);
-    int i = 0;
+    int i = 0;    // under here I added TweetModerationGUI.NumberTweets which takes the slider's value and limits the Tweets parsed.
     while(scanner.hasNextLine() && i < TweetModerationGUI.NumberTweets){ //this i < 10000 is just to help you test, so that it doesn't take too long to run each time. you should eventually move towards reading in the entire file.
       line = scanner.nextLine();
       String[] fields = line.split("\",\"");
       fields[0] = fields[0].substring(1);
-      try{
+      try{        //I added the data fields I picked to the tweets arraylist after parsing.
         long l = Long.parseLong(fields[0]);
 //        BigInteger Qcount = new BigInteger(fields[23]);
 //        BigInteger Rcount = new BigInteger(fields[24]);

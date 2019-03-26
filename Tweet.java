@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 
 public class Tweet{
-    private long tweetid; // index[0]
+    private long tweetid; // index[0]     //I added the data fields based on the tweets diagram in stage 6. I added the constractors and the getters as well.
     private String userid; // index[1]
     private String tweet_text; // index[12]
     private String tweet_time;// index[13]

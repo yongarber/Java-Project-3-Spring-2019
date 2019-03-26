@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class User {
-  private String userid; //index[0]
+  private String userid; //index[0]    //I added the data fields based on the users diagram in stage 5. I added the constractors and the getters as well.
   private ArrayList<Tweet> tweets;
   private String user_display_name;//index[1]
   private String user_reported_location; //index[3]

@@ -16,13 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class TweetModerationGUI extends Application {
-    ArrayList<Tweet> tweets;
+    ArrayList<Tweet> tweets;   // Here I add all the variables to which I want to have a bigger scope.
     ArrayList<User> users;
     //ArrayList<User> Users;
-    static long NumberUsers = 0;
+    static long NumberUsers = 0; // Those two static long are the variables that hold the value from the slider.
     static long NumberTweets = 0;
     String parse = "All";  //parse can be "All" or "Eng" or "Other"
-    Stage stageTweets = new Stage();
+    Stage stageTweets = new Stage();// Those two stages initiate the stages for the users window and the tweets window.
     Stage stage = new Stage();
 
     public void parseUsersAndTweets(){
@@ -48,7 +48,7 @@ public class TweetModerationGUI extends Application {
     protected BorderPane getBorderPane(ArrayList<User> users) {
 
 
-        Slider slider = new Slider(1,800,40);
+        Slider slider = new Slider(1,800,40); // here I make the slider for the users, between 1 to 800 with initial value of 1.
 //        slider.setMin(0);
 //        slider.setMax(800);
 //        slider.setValue(40);
@@ -59,16 +59,16 @@ public class TweetModerationGUI extends Application {
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(10);
 
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
+        slider.valueProperty().addListener(new ChangeListener<Number>() { //this is the handler for the slider which returns the rounded value we get from the slider.
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 NumberUsers= Math.round(newValue.doubleValue());
                 System.out.println(NumberUsers);
             }
         });
-        Slider slider2 = new Slider();
+        Slider slider2 = new Slider();  // here I make the slider for the users, between 1 to 1200000 with initial value of 1.
         slider2.setMin(1);
-        slider2.setMax(1200000); // Need to make sure this part works!!! Why this part doesnt work and the users do work?
+        slider2.setMax(1200000);
         slider2.setValue(1);
         slider2.setShowTickLabels(true);
         slider2.setShowTickMarks(true);
@@ -76,23 +76,23 @@ public class TweetModerationGUI extends Application {
         slider2.setMinorTickCount(5);
         slider2.setBlockIncrement(10);
 
-        slider2.valueProperty().addListener(new ChangeListener<Number>() {
+        slider2.valueProperty().addListener(new ChangeListener<Number>() {  //this is the handler for the tweets slider which returns the rounded value we get from the slider.
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 NumberTweets= Math.round(newValue.doubleValue());
                 System.out.println(NumberTweets);
             }
         });
-         Label nameslider = new Label("Users Slider");
+         Label nameslider = new Label("Users Slider"); // I add lables for the sliders in the window
          Label nameslider2 = new Label("Tweets Slider");
 
 
-        RadioButton Eng =new RadioButton("English");
+        RadioButton Eng =new RadioButton("English"); // Here I make the radio buttons for the language and put them in a HBox.
         RadioButton Other =new RadioButton("Other");
         RadioButton All =new RadioButton("All");
         HBox buttons = new HBox(Eng,Other, All);
 
-        Button Cancel = new Button("Cancel");
+        Button Cancel = new Button("Cancel"); // cancel button with its handler that terminates the code.
         Cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -100,16 +100,16 @@ public class TweetModerationGUI extends Application {
                 Platform.exit();
             }
         });
-        Button Parse = new Button("Parse");
+        Button Parse = new Button("Parse");// parse button with its handler that parse the users and the tweets based on the slider.
         Parse.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Parse");
                 parseUsersAndTweets();
-                getBorderPane(users);
+                getBorderPane(users); // I added this line to refresh the users - it didnt run without it.
             }
         });
-        Button ShowUser = new Button("Show Users");
+        Button ShowUser = new Button("Show Users"); // Show users button with its handler that show the users stage/window with the users info in it.
         ShowUser.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -117,16 +117,16 @@ public class TweetModerationGUI extends Application {
                 stage.show();
             }
         });
-        HBox buttons1 = new HBox(Parse, Cancel,ShowUser);
+        HBox buttons1 = new HBox(Parse, Cancel,ShowUser); // put those buttons in a HBox.
 
-        ToggleGroup group = new ToggleGroup();
+        ToggleGroup group = new ToggleGroup(); // put all the radio button in a togglegroup so only one can be picked at a time.
         Eng.setToggleGroup(group);
         Other.setToggleGroup(group);
         All.setToggleGroup(group);
         All.setSelected(true);
 
 
-        Eng.setOnAction(new EventHandler<ActionEvent>() {
+        Eng.setOnAction(new EventHandler<ActionEvent>() {  // the three handlers under here are the radio button handlers ready to be used when parsing based on the language.
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Eng");
@@ -150,23 +150,23 @@ public class TweetModerationGUI extends Application {
             }
         });
 
-        // the pane for the users
-        Pane canvasTweets = new Pane();
+        // the pane for the tweets
+        Pane canvasTweets = new Pane(); // this is the template for the tweets pane.
         canvasTweets.setPrefSize(200,200);
 
 
-        //new stage for users
-        stageTweets.setTitle("Tweets");
+        //new stage for tweets
+        stageTweets.setTitle("Tweets"); // this is the title and size of the window.
         stageTweets.setScene(new Scene(canvasTweets, 350, 450));
 
 
         //pane for each user
-        Pane EachUser = new Pane();
+        Pane EachUser = new Pane();// this is the template for the users pane.
         //Label userId = new Label(User.getuserid());
 
 
         // the pane for the users
-        ScrollPane canvas = new ScrollPane();
+        ScrollPane canvas = new ScrollPane(); // adding the number of users at the top and adding a label and a button for each user. because of the issue with the users arraylist I coudnt add the getters without getting a compile error.
         canvas.setPrefSize(200,200);
         Label userspane = new Label (NumberUsers +"  users");
         VBox UsersPane  = new VBox();
@@ -179,7 +179,7 @@ public class TweetModerationGUI extends Application {
             UsersPane.getChildren().addAll(userspane1, Tweets);
             Tweets.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent event) {
+                public void handle(ActionEvent event) { // this is the handler for the show tweets button that opens the tweets stage/window
                     System.out.println("Show Tweets");
                     System.out.println(Tweets.getId());
                     stageTweets.show();
@@ -188,13 +188,13 @@ public class TweetModerationGUI extends Application {
         }
         canvas.setContent(UsersPane);
         //new stage for users
-        stage.setTitle("Users");
+        stage.setTitle("Users");//setting up the stage for users.
         stage.setScene(new Scene(canvas, 350, 450));
 
 
 
 
-        VBox sliders = new VBox(20,nameslider,slider,nameslider2, slider2,buttons, buttons1);
+        VBox sliders = new VBox(20,nameslider,slider,nameslider2, slider2,buttons, buttons1);// I put all the nodes in a VBox for the first window.
 
         BorderPane pane = new BorderPane();
         Text text = new Text("Loaded " + users.size() + " users; " +tweets.size()+" tweets");
@@ -204,7 +204,7 @@ public class TweetModerationGUI extends Application {
         content.add(new Pane());
         ListView<Pane> lv = new ListView<>(
             FXCollections.observableArrayList(content));
-        pane.setTop(sliders);
+        pane.setTop(sliders);// I put the VBox in the top pane for display.
         pane.setBottom(text);
         pane.setCenter(new ScrollPane(lv));
         return pane;
